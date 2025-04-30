@@ -2,3 +2,4 @@
 WSL2-Linux-Kernel-linux-msft-wsl-6.6.y.zip filter=lfs diff=lfs merge=lfs -text
 Ubuntu2204-221101.AppxBundle filter=lfs diff=lfs merge=lfs -text
 Ubuntu2404-240425.AppxBundle filter=lfs diff=lfs merge=lfs -text
+대덕전자[[:space:]]ISH.zip filter=lfs diff=lfs merge=lfs -text
