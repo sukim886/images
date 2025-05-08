@@ -1,0 +1,45 @@
+name: aas_server_new
+services:
+  db:
+    image: postgres:14-alpine
+    ports:
+      - "5808:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=filemanager
+    volumes:
+      - aas_server_new_postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  backend:
+    image: 20250416-2-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/filemanager
+      - UPLOAD_FOLDER=/app/uploads
+    volumes:
+      - ./data/uploads:/app/uploads
+    networks:
+      - app-network
+
+  frontend:
+    image: 20250416-2-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  aas_server_new_postgres-data:
+    external: true
